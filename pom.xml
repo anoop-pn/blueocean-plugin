@@ -131,22 +131,19 @@
     <module>blueocean-web</module>
     <module>blueocean-rest</module>
     <module>blueocean-pipeline-scm-api</module>
-
-    <!-- <module>blueocean-rest-impl</module> --> <!--Not working-->
-    <!-- <module>blueocean-pipeline-api-impl</module>  --> <!--Not working-->
-    <!-- <module>blueocean-events</module> -->   <!--Not working-->
-
+    <module>blueocean-rest-impl</module>
+    <module>blueocean-pipeline-api-impl</module> 
+    <module>blueocean-events</module>
     <module>blueocean-dashboard</module>
     <module>blueocean-personalization</module>
-
-    <!-- <module>blueocean-config</module> --> <!--Not working-->
-    <!-- <module>blueocean</module> --> <!--Not working-->
-    <!-- <module>blueocean-jwt</module> --> <!--Not working-->
-    <!-- <module>blueocean-github-pipeline</module> --> <!--Not working-->
-    <!-- <module>blueocean-git-pipeline</module> --> <!--Not working-->
-    <!-- <module>blueocean-bitbucket-pipeline</module> --> <!--Not working-->
-    <!-- <module>blueocean-pipeline-editor</module> --> <!--Not working-->
-    <!-- <module>blueocean-jira</module> --> <!--Not working-->
+    <module>blueocean-config</module>
+    <module>blueocean</module>
+    <module>blueocean-jwt</module>
+    <module>blueocean-github-pipeline</module>
+    <module>blueocean-git-pipeline</module>
+    <module>blueocean-bitbucket-pipeline</module>
+    <module>blueocean-pipeline-editor</module>
+    <module>blueocean-jira</module>
     <module>blueocean-executor-info</module>
   </modules>
 
