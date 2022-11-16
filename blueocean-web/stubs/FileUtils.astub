@@ -2617,7 +2617,7 @@ public class FileUtils {
      * .UnsupportedEncodingException} in version 2.2 if the named charset is unavailable.
      * @since 2.3
      */
-    public static String readFileToString(final File file, final String charsetName) throws IOException {
+    public static String readFileToString(@Untainted final File file, final String charsetName) throws IOException {
         return readFileToString(file, Charsets.toCharset(charsetName));
     }
 

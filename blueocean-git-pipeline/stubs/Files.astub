@@ -79,7 +79,7 @@ import java.util.stream.StreamSupport;
 
 import sun.nio.ch.FileChannelImpl;
 import sun.nio.fs.AbstractFileSystemProvider;
-import org.checkerframework.checker.tainting.qual.PolyTainted;
+import org.checkerframework.checker.tainting.qual.Untainted;
 
 /**
  * This class consists exclusively of static methods that operate on files,
@@ -363,7 +363,7 @@ public final class Files {
      *
      * @see java.nio.channels.FileChannel#open(Path,Set,FileAttribute[])
      */
-    public static SeekableByteChannel newByteChannel(Path path,
+    public static @Untainted SeekableByteChannel newByteChannel(Path path,
                                                      Set<? extends OpenOption> options,
                                                      FileAttribute<?>... attrs)
         throws IOException
@@ -642,7 +642,7 @@ public final class Files {
      *          installed, the {@link SecurityManager#checkWrite(String) checkWrite}
      *          method is invoked to check write access to the new file.
      */
-    public static Path createFile(Path path, FileAttribute<?>... attrs)
+    public static @Untainted Path createFile(@Untainted Path path, FileAttribute<?>... attrs)
         throws IOException
     {
         newByteChannel(path, DEFAULT_CREATE_OPTIONS, attrs).close();
@@ -684,7 +684,7 @@ public final class Files {
      *          installed, the {@link SecurityManager#checkWrite(String) checkWrite}
      *          method is invoked to check write access to the new directory.
      */
-    public static Path createDirectory(Path dir, FileAttribute<?>... attrs)
+    public static @Untainted Path createDirectory(@Untainted Path dir, FileAttribute<?>... attrs)
         throws IOException
     {
         provider(dir).createDirectory(dir, attrs);
@@ -958,7 +958,7 @@ public final class Files {
      *          method is invoked to check write access when creating the
      *          directory.
      */
-    public static @PolyTainted Path createTempDirectory(Path dir,
+    public static @Untainted Path createTempDirectory(Path dir,
                                            String prefix,
                                            FileAttribute<?>... attrs)
         throws IOException
@@ -1000,7 +1000,7 @@ public final class Files {
      *          method is invoked to check write access when creating the
      *          directory.
      */
-    public static @PolyTainted Path createTempDirectory(String prefix,
+    public static @Untainted Path createTempDirectory(String prefix,
                                            FileAttribute<?>... attrs)
         throws IOException
     {
