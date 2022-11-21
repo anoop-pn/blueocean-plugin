@@ -124,12 +124,12 @@
   </developers>
 
   <modules>
-    <module>jenkins-design-language</module>
+    <!-- <module>jenkins-design-language</module>
     <module>blueocean-core-js</module>
     <module>blueocean-commons</module>
-    <module>blueocean-i18n</module>
+    <module>blueocean-i18n</module> -->
     <module>blueocean-web</module>
-    <module>blueocean-rest</module>
+    <!-- <module>blueocean-rest</module>
     <module>blueocean-pipeline-scm-api</module>
     <module>blueocean-rest-impl</module>
     <module>blueocean-pipeline-api-impl</module> 
@@ -144,7 +144,7 @@
     <module>blueocean-bitbucket-pipeline</module>
     <module>blueocean-pipeline-editor</module>
     <module>blueocean-jira</module>
-    <module>blueocean-executor-info</module>
+    <module>blueocean-executor-info</module> -->
   </modules>
 
   <repositories>
@@ -253,12 +253,26 @@
           <version>${jacoco.version}</version>
           <scope>test</scope>
       </dependency>
-      <!-- https://mvnrepository.com/artifact/org.checkerframework/checker-qual -->
-      <dependency>
+    <dependency>
         <groupId>org.checkerframework</groupId>
         <artifactId>checker-qual</artifactId>
         <version>3.26.0</version>
-      </dependency>
+    </dependency>
+    <dependency>
+        <groupId>com.google.errorprone</groupId>
+        <artifactId>javac</artifactId>
+        <version>9+181-r4173-1</version>
+    </dependency>
+    <dependency>
+        <groupId>org.checkerframework</groupId>
+        <artifactId>checker</artifactId>
+        <version>3.26.0</version>
+    </dependency>
+    <dependency>
+        <groupId>edu.ucr.cs.riple.taint</groupId>
+        <artifactId>ucrtainting-checker</artifactId>
+        <version>0.1</version>
+    </dependency>
   </dependencies>
 
   <dependencyManagement>
@@ -773,89 +787,40 @@
               </systemPropertyVariables>
           </configuration>
       </plugin>
-    </plugins>
-  </build>
-
-    <profiles>
-        <profile>
-        <id>checkerframework</id>
-        <activation>
-            <jdk>[1.8,)</jdk>
-        </activation>
-        <build>
-            <plugins>
-            <plugin>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.10.1</version>
-                <configuration>
+      <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>3.8.1</version>
+            <configuration>
+                <source>11</source>
+                <target>11</target>
+                <encoding>UTF-8</encoding>
                 <fork>true</fork> <!-- Must fork or else JVM arguments are ignored. -->
-                <meminitial>1000m</meminitial>
-                <maxmem>4000m</maxmem>
                 <compilerArguments>
                     <Xmaxerrs>10000</Xmaxerrs>
                     <Xmaxwarns>10000</Xmaxwarns>
                 </compilerArguments>
                 <annotationProcessorPaths>
                     <path>
-                    <groupId>org.checkerframework</groupId>
-                    <artifactId>checker</artifactId>
-                    <version>3.26.0</version>
+                        <groupId>edu.ucr.cs.riple.taint</groupId>
+                        <artifactId>ucrtainting-checker</artifactId>
+                        <version>0.1</version>
                     </path>
                 </annotationProcessorPaths>
                 <annotationProcessors>
                     <!-- Add all the checkers you want to enable here -->
-                    <annotationProcessor>org.checkerframework.checker.tainting.TaintingChecker</annotationProcessor>
+                    <annotationProcessor>edu.ucr.cs.riple.taint.ucrtainting.UCRTaintingChecker</annotationProcessor>
                 </annotationProcessors>
                 <compilerArgs>
-                    <!-- -Awarns turns type-checking errors into warnings. -->
-                    <arg>-Awarns</arg> 
+                    <arg>-Awarns</arg>
+                    <arg>-Astubs=${project.basedir}/stubs</arg>
                 </compilerArgs>
-                </configuration>
-            </plugin>
-            </plugins>
-        </build>
-        <dependencies>
-            <dependency>
-            <groupId>org.checkerframework</groupId>
-            <artifactId>checker</artifactId>
-            <version>3.26.0</version>
-            </dependency>
-        </dependencies>
-        </profile>
-
-        <profile>
-        <id>checkerframework-jdk9orlater</id>
-        <activation>
-        <jdk>[9,)</jdk>
-        </activation>
-        <build>
-        <plugins>
-        <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-compiler-plugin</artifactId>
-            <configuration>
-            <fork>true</fork>
-            <compilerArgs combine.children="append">
-            <arg>-J--add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED</arg>
-            <arg>-J--add-exports=jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED</arg>
-            <arg>-J--add-exports=jdk.compiler/com.sun.tools.javac.file=ALL-UNNAMED</arg>
-            <arg>-J--add-exports=jdk.compiler/com.sun.tools.javac.main=ALL-UNNAMED</arg>
-            <arg>-J--add-exports=jdk.compiler/com.sun.tools.javac.model=ALL-UNNAMED</arg>
-            <arg>-J--add-exports=jdk.compiler/com.sun.tools.javac.processing=ALL-UNNAMED</arg>
-            <arg>-J--add-exports=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED</arg>
-            <arg>-J--add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED</arg>
-            <arg>-J--add-opens=jdk.compiler/com.sun.tools.javac.comp=ALL-UNNAMED</arg>
-            </compilerArgs>
             </configuration>
         </plugin>
-        </plugins>
-        </build>
-        <properties>
-            <!-- Needed for animal-sniffer-maven-plugin version 1.19 (version 1.20 is fixed). -->
-            <animal.sniffer.skip>true</animal.sniffer.skip>
-        </properties>
-        </profile>
+    </plugins>
+  </build>
 
+    <profiles>
         <profile>
             <id>node-execution</id>
             <activation>
