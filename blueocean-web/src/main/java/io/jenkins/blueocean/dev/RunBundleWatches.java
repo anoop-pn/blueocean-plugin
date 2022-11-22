@@ -22,9 +22,10 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.regex.Pattern;
 import edu.ucr.cs.riple.taint.ucrtainting.qual.RTainted;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RPolyTainted;
 import java.io.IOException;
 
-@SuppressWarnings("all")
+// @SuppressWarnings("all")
 public class RunBundleWatches {
     public final static boolean isEnabled = (new BlueOceanUI().isDevelopmentMode());
     final static List<BundleBuild> builds = new CopyOnWriteArrayList<>();
@@ -381,7 +382,7 @@ public class RunBundleWatches {
      * @param dir to search
      * @return plugin's dir
      */
-    private static File findPluginWorkDir(File dir) {
+    private static @RPolyTainted File findPluginWorkDir(@RPolyTainted File dir) {
         if (dir == null) {
             return null;
         }

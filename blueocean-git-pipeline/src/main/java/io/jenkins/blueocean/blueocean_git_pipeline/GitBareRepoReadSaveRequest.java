@@ -55,7 +55,7 @@ import org.eclipse.jgit.lib.RefUpdate;
 import org.eclipse.jgit.lib.Repository;
 import org.jenkinsci.plugins.gitclient.GitClient;
 import org.jenkinsci.plugins.gitclient.RepositoryCallback;
-import org.checkerframework.checker.tainting.qual.Untainted;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Uses the SCM Git cache operating on the bare repository to load/save content
@@ -66,7 +66,7 @@ class GitBareRepoReadSaveRequest extends GitReadSaveRequest {
     private static final String LOCAL_REF_BASE = "refs/remotes/origin/";
     private static final String REMOTE_REF_BASE = "refs/heads/";
 
-    private final File repositoryPath;
+    private final @RUntainted File repositoryPath;
     private final GitTool gitTool;
 
     GitBareRepoReadSaveRequest(AbstractGitSCMSource gitSource, String branch, String commitMessage, String sourceBranch, String filePath, byte[] contents) {

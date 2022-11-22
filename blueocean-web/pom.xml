@@ -100,7 +100,6 @@
                 </annotationProcessors>
                 <compilerArgs>
                     <arg>-Awarns</arg>
-                    <arg>-Astubs=${project.basedir}/stubs</arg>
                 </compilerArgs>
             </configuration>
         </plugin>

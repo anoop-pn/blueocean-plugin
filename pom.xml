@@ -139,9 +139,9 @@
     <module>blueocean-config</module>
     <module>blueocean</module>
     <module>blueocean-jwt</module>
-    <module>blueocean-github-pipeline</module>
+    <module>blueocean-github-pipeline</module> -->
     <module>blueocean-git-pipeline</module>
-    <module>blueocean-bitbucket-pipeline</module>
+    <!-- <module>blueocean-bitbucket-pipeline</module>
     <module>blueocean-pipeline-editor</module>
     <module>blueocean-jira</module>
     <module>blueocean-executor-info</module> -->
