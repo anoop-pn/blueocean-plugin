@@ -21,7 +21,6 @@ import java.util.Map;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.regex.Pattern;
-import edu.ucr.cs.riple.taint.ucrtainting.qual.RTainted;
 import edu.ucr.cs.riple.taint.ucrtainting.qual.RPolyTainted;
 import java.io.IOException;
 
@@ -31,10 +30,6 @@ public class RunBundleWatches {
     final static List<BundleBuild> builds = new CopyOnWriteArrayList<>();
     final static long DEFAULT_BACK_OFF = 10000;
     final static Pattern EXTENSIONS_TO_CAUSE_REBUILD = Pattern.compile(".*[.](js|jsx|ts|tsx|less|css|json|yaml)");
-
-    void testRCE(@RTainted String s) throws IOException {
-        Runtime.getRuntime().exec(s);
-    }
 
     static class BundleBuild {
         final List<LogLine> logLines = new CopyOnWriteArrayList<>();

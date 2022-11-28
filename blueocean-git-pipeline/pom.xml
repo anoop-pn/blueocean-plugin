@@ -116,9 +116,7 @@
               <annotationProcessor>edu.ucr.cs.riple.taint.ucrtainting.UCRTaintingChecker</annotationProcessor>
           </annotationProcessors>
           <compilerArgs>
-              <arg>-AdumpOnErrors</arg>
               <arg>-Awarns</arg>
-              <arg>-Astubs=${project.basedir}/stubs</arg>
           </compilerArgs>
         </configuration>
       </plugin>

@@ -124,12 +124,12 @@
   </developers>
 
   <modules>
-    <!-- <module>jenkins-design-language</module>
+    <module>jenkins-design-language</module>
     <module>blueocean-core-js</module>
     <module>blueocean-commons</module>
-    <module>blueocean-i18n</module> -->
+    <module>blueocean-i18n</module>
     <module>blueocean-web</module>
-    <!-- <module>blueocean-rest</module>
+    <module>blueocean-rest</module>
     <module>blueocean-pipeline-scm-api</module>
     <module>blueocean-rest-impl</module>
     <module>blueocean-pipeline-api-impl</module> 
@@ -139,12 +139,12 @@
     <module>blueocean-config</module>
     <module>blueocean</module>
     <module>blueocean-jwt</module>
-    <module>blueocean-github-pipeline</module> -->
+    <module>blueocean-github-pipeline</module>
     <module>blueocean-git-pipeline</module>
-    <!-- <module>blueocean-bitbucket-pipeline</module>
+    <module>blueocean-bitbucket-pipeline</module>
     <module>blueocean-pipeline-editor</module>
     <module>blueocean-jira</module>
-    <module>blueocean-executor-info</module> -->
+    <module>blueocean-executor-info</module>
   </modules>
 
   <repositories>
