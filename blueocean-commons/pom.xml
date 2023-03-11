@@ -96,6 +96,8 @@
           </annotationProcessors>
           <compilerArgs>
               <arg>-Awarns</arg>
+              <arg>-AannotatedPackages=com.test</arg>
+              <arg>-AenableCustomCheck=false</arg>
           </compilerArgs>
         </configuration>
       </plugin>
