@@ -22,6 +22,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.regex.Pattern;
 import edu.ucr.cs.riple.taint.ucrtainting.qual.RPolyTainted;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 import java.io.IOException;
 
 // @SuppressWarnings("all")
@@ -102,7 +103,7 @@ public class RunBundleWatches {
                     System.out.println("---- Watching " + build.name + " in: " + path);
 
                     JSONObject packageJson = JSONObject.fromObject(FileUtils.readFileToString(packageFile));
-                    final String[] npmCommand = { "mvnbuild", null };
+                    final @RUntainted String[] npmCommand = { "mvnbuild", null };
 
                     if (packageJson.has("scripts")) {
                         JSONObject scripts = packageJson.getJSONObject("scripts");
@@ -125,11 +126,11 @@ public class RunBundleWatches {
                                 while (true) {
                                     try {
                                         Map<String, String> env = new HashMap<>(System.getenv());
-                                        String[] command;
+                                        @RUntainted String[] command;
                                         if (SystemUtils.IS_OS_WINDOWS) {
-                                            command = new String[]{"cmd", "/C", "npm", "run", npmCommand[1]};
+                                            command = new @RUntainted String[]{"cmd", "/C", "npm", "run", npmCommand[1]};
                                         } else {
-                                            command = new String[]{"bash", "-c", "${0} ${1+\"$@\"}", "npm", "run", npmCommand[1]};
+                                            command = new @RUntainted String[]{"bash", "-c", "${0} ${1+\"$@\"}", "npm", "run", npmCommand[1]};
                                         }
 
                                         ProcessBuilder pb = new ProcessBuilder(Arrays.asList(command))
@@ -287,11 +288,11 @@ public class RunBundleWatches {
 
                                                 try {
                                                     Map<String, String> env = new HashMap<>(System.getenv());
-                                                    String[] command;
+                                                    @RUntainted String[] command;
                                                     if (SystemUtils.IS_OS_WINDOWS) {
-                                                        command = new String[]{"cmd", "/C", "npm", "run", npmCommand[0]};
+                                                        command = new @RUntainted String[]{"cmd", "/C", "npm", "run", npmCommand[0]};
                                                     } else {
-                                                        command = new String[]{"bash", "-c", "${0} ${1+\"$@\"}", "npm", "run", npmCommand[0]};
+                                                        command = new @RUntainted String[]{"bash", "-c", "${0} ${1+\"$@\"}", "npm", "run", npmCommand[0]};
                                                     }
 
                                                     System.out.println("---- Rebuilding: " + build.name + " due to change in: " + watchPath.relativize(modified));
